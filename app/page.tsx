@@ -14,7 +14,9 @@ import {
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
-type Layer = 'L1' | 'L2' | 'L3_reminder' | 'L3_pbm' | 'L3_ticket' | 'L3_confirm';
+// L1 now combines the old L1 nudge + L2 survey in one sheet.
+// Old L3 outcomes become L2 in the new numbering.
+type Layer = 'L1' | 'L2_reminder' | 'L2_pbm' | 'L2_ticket' | 'L2_confirm';
 type StateMode = 'clean' | 'error';
 
 interface ConfirmState {
@@ -89,16 +91,19 @@ function AppBackground({ screen }: { screen: Screen }) {
   );
 }
 
-// ─── Layer 1: Nudge sheet ─────────────────────────────────────────────────────
+// ─── Layer 1: Combined nudge + dropout sheet ──────────────────────────────────
+// "Continue now" lives as a quiet top-right pill.
+// Dropout reasons are shown immediately — no second tap needed.
 
 function L1Sheet({
-  screen, cohort, stateMode, onContinueNow, onContinueLater,
+  screen, cohort, stateMode, onContinueNow, onRoute, onSkip,
 }: {
   screen: Screen;
   cohort: CohortKey;
   stateMode: StateMode;
   onContinueNow: () => void;
-  onContinueLater: () => void;
+  onRoute: (r: Route) => void;
+  onSkip: () => void;
 }) {
   const isErr = stateMode === 'error' && screen.error !== null;
   const data = isErr ? screen.error! : screen.clean;
@@ -111,23 +116,36 @@ function L1Sheet({
       className="absolute inset-x-0 bottom-0 bg-white flex flex-col gap-[7px] pt-3 px-[13px] pb-[18px]"
       style={{ borderRadius: '20px 20px 0 0' }}
     >
-      <Handle />
+      {/* Handle + "Continue now" pill in the same row */}
+      <div className="flex items-center justify-between">
+        <div className="flex-1" />
+        <Handle />
+        <div className="flex-1 flex justify-end">
+          <button
+            onClick={onContinueNow}
+            className="flex items-center gap-[4px] px-[9px] py-[4px] rounded-full text-[10px] font-medium bg-[#18181B] text-white"
+          >
+            Continue now
+            <ChevronRight size={10} aria-hidden />
+          </button>
+        </div>
+      </div>
 
-      {/* Cohort tag */}
-      <span
-        className="inline-flex items-center self-start px-[7px] py-[2px] rounded-full text-[10px] font-medium"
-        style={{ background: c.bg, color: c.color }}
-      >
-        {c.label}
-      </span>
-
-      {/* Error badge */}
-      {isErr && (
-        <span className="inline-flex items-center gap-1 self-start px-[7px] py-[2px] rounded-full text-[10px] font-medium bg-[#FEF2F2] text-[#991B1B]">
-          <AlertCircle size={10} aria-hidden />
-          Issue on this screen
+      {/* Meta row: cohort tag + optional error badge */}
+      <div className="flex items-center gap-[5px] flex-wrap">
+        <span
+          className="inline-flex items-center px-[7px] py-[2px] rounded-full text-[10px] font-medium"
+          style={{ background: c.bg, color: c.color }}
+        >
+          {c.label}
         </span>
-      )}
+        {isErr && (
+          <span className="inline-flex items-center gap-1 px-[7px] py-[2px] rounded-full text-[10px] font-medium bg-[#FEF2F2] text-[#991B1B]">
+            <AlertCircle size={10} aria-hidden />
+            Issue on this screen
+          </span>
+        )}
+      </div>
 
       {/* Progress signal */}
       {screen.prog.type === 'time' ? (
@@ -147,83 +165,47 @@ function L1Sheet({
         </div>
       )}
 
-      {/* Header */}
-      <p className="text-[14px] font-medium text-on-surface-primary leading-snug m-0">{data.hdr}</p>
-
-      {/* Value prop */}
+      {/* Header + value prop */}
+      <p className="text-[13px] font-medium text-on-surface-primary leading-snug m-0">{data.hdr}</p>
       <p className="text-[11px] text-on-surface-secondary leading-relaxed m-0">{vp}</p>
 
-      {/* CTAs */}
+      {/* Divider */}
+      <div className="h-px bg-border-primary my-[1px]" />
+
+      {/* Dropout reasons — upfront, no second step */}
+      <p className="text-[10px] font-medium text-on-surface-tertiary uppercase tracking-wide m-0">
+        What stopped you?
+      </p>
+      <div className="flex flex-col gap-[4px]">
+        {data.opts.map((o, i) => (
+          <button
+            key={i}
+            onClick={() => onRoute(o.route)}
+            className="flex items-center justify-between gap-[5px] px-[10px] py-[8px] rounded-xl text-[11px] text-on-surface-primary text-left bg-surface-primary"
+            style={{ border: '0.5px solid var(--border-primary)' }}
+          >
+            <span className="flex-1">{o.text}</span>
+            <span
+              className={`flex-shrink-0 text-[9px] font-medium px-[5px] py-[1px] rounded-full ${ROUTE_TAG_STYLES[o.route]}`}
+            >
+              {ROUTE_LABELS[o.route]}
+            </span>
+          </button>
+        ))}
+      </div>
+
+      {/* Skip */}
       <button
-        onClick={onContinueNow}
-        className="w-full py-[10px] rounded-xl bg-[#18181B] text-white text-[12px] font-medium"
+        onClick={onSkip}
+        className="w-full py-[4px] text-[11px] text-on-surface-tertiary bg-transparent border-0"
       >
-        Continue now
-      </button>
-      <button
-        onClick={onContinueLater}
-        className="w-full py-[10px] rounded-xl border border-border-primary bg-surface-primary text-on-surface-primary text-[12px] font-medium"
-        style={{ borderWidth: 0.5 }}
-      >
-        Continue later
+        Skip
       </button>
     </div>
   );
 }
 
-// ─── Layer 2: Dropout survey ──────────────────────────────────────────────────
-
-function L2Survey({
-  screen, stateMode, onRoute, onSkip,
-}: {
-  screen: Screen;
-  stateMode: StateMode;
-  onRoute: (r: Route) => void;
-  onSkip: () => void;
-}) {
-  const isErr = stateMode === 'error' && screen.error !== null;
-  const opts = (isErr ? screen.error! : screen.clean).opts;
-
-  return (
-    <>
-      <div className="flex-1" style={{ background: 'rgba(0,0,0,0.28)' }} />
-      <div
-        className="bg-white flex flex-col gap-[7px] pt-3 px-[13px] pb-[18px]"
-        style={{ borderRadius: '20px 20px 0 0' }}
-      >
-        <Handle />
-        <p className="text-[10px] font-medium text-on-surface-tertiary uppercase tracking-wide m-0">
-          What stopped you?
-        </p>
-        <div className="flex flex-col gap-[5px]">
-          {opts.map((o, i) => (
-            <button
-              key={i}
-              onClick={() => onRoute(o.route)}
-              className="flex items-center justify-between gap-[5px] px-[10px] py-[8px] rounded-xl text-[11px] text-on-surface-primary text-left bg-surface-primary"
-              style={{ border: '0.5px solid var(--border-primary)' }}
-            >
-              <span className="flex-1">{o.text}</span>
-              <span
-                className={`flex-shrink-0 text-[9px] font-medium px-[5px] py-[1px] rounded-full ${ROUTE_TAG_STYLES[o.route]}`}
-              >
-                {ROUTE_LABELS[o.route]}
-              </span>
-            </button>
-          ))}
-        </div>
-        <button
-          onClick={onSkip}
-          className="w-full py-[5px] text-[11px] text-on-surface-tertiary bg-transparent border-0"
-        >
-          Skip
-        </button>
-      </div>
-    </>
-  );
-}
-
-// ─── Layer 3: Reminder picker ─────────────────────────────────────────────────
+// ─── Layer 2: Reminder picker ────────────────────────────────────────────────
 
 function L3Reminder({
   onConfirm, onBack,
@@ -280,7 +262,7 @@ function L3Reminder({
   );
 }
 
-// ─── Layer 3: PBM callback picker ────────────────────────────────────────────
+// ─── Layer 2: PBM callback picker ────────────────────────────────────────────
 
 function L3PBM({
   onConfirm, onBack,
@@ -349,7 +331,7 @@ function L3PBM({
   );
 }
 
-// ─── Layer 3: Tech ticket confirmation ───────────────────────────────────────
+// ─── Layer 2: Tech ticket confirmation ───────────────────────────────────────
 
 function L3Ticket({ onBack }: { onBack: () => void }) {
   return (
@@ -368,7 +350,7 @@ function L3Ticket({ onBack }: { onBack: () => void }) {
   );
 }
 
-// ─── Layer 3: Confirmation (reminder set / callback booked / default) ─────────
+// ─── Layer 2: Confirmation (reminder set / callback booked / default) ────────
 
 function L3Confirm({ state, onBack }: { state: ConfirmState; onBack: () => void }) {
   return (
@@ -493,11 +475,11 @@ export default function ExitNudgePrototype() {
 
   const handleRoute = useCallback((route: Route) => {
     if (route === 'reminder') {
-      setLayer('L3_reminder');
+      setLayer('L2_reminder');
     } else if (route === 'pbm') {
-      setLayer('L3_pbm');
+      setLayer('L2_pbm');
     } else if (route === 'ticket') {
-      setLayer('L3_ticket');
+      setLayer('L2_ticket');
     } else {
       // default (skip)
       setConfirm({
@@ -506,7 +488,7 @@ export default function ExitNudgePrototype() {
         title: "We'll remind you",
         body: "Your progress is saved. We'll send you a nudge when the time feels right — continue whenever you're ready.",
       });
-      setLayer('L3_confirm');
+      setLayer('L2_confirm');
     }
   }, []);
 
@@ -517,7 +499,7 @@ export default function ExitNudgePrototype() {
       title: 'Reminder set',
       body: "We'll send you a notification with a link back to your last screen.",
     });
-    setLayer('L3_confirm');
+    setLayer('L2_confirm');
   }, []);
 
   const handlePBMConfirm = useCallback(() => {
@@ -527,7 +509,7 @@ export default function ExitNudgePrototype() {
       title: 'Callback booked',
       body: "We'll call you at your selected time. Your progress is saved.",
     });
-    setLayer('L3_confirm');
+    setLayer('L2_confirm');
   }, []);
 
   const goBackToL1 = useCallback(() => setLayer('L1'), []);
@@ -555,10 +537,10 @@ export default function ExitNudgePrototype() {
         />
       </div>
 
-      {/* Layer indicator */}
+      {/* Layer indicator — 2 steps now */}
       <div className="w-full max-w-[430px] flex gap-1 mb-1 px-1">
-        {(['L1', 'L2', 'L3'] as const).map((l) => {
-          const active = layer === l || layer.startsWith(l);
+        {(['L1', 'L2'] as const).map((l) => {
+          const active = layer === 'L1' ? l === 'L1' : l === 'L2';
           return (
             <div
               key={l}
@@ -570,11 +552,10 @@ export default function ExitNudgePrototype() {
       </div>
       <div className="w-full max-w-[430px] flex gap-0 mb-0 px-1">
         {[
-          { id: 'L1', label: 'Layer 1 — Nudge' },
-          { id: 'L2', label: 'Layer 2 — Survey' },
-          { id: 'L3', label: 'Layer 3 — Outcome' },
+          { id: 'L1', label: 'Layer 1 — Nudge + options' },
+          { id: 'L2', label: 'Layer 2 — Outcome' },
         ].map(({ id, label }) => {
-          const active = layer === id || layer.startsWith(id);
+          const active = layer === 'L1' ? id === 'L1' : id === 'L2';
           return (
             <p key={id} className="flex-1 text-center text-[9px] font-medium transition-colors" style={{ color: active ? STAGE_COLOR[screen.stage].color : '#B0B3BD' }}>
               {label}
@@ -586,7 +567,7 @@ export default function ExitNudgePrototype() {
       {/* Phone shell */}
       <PhoneShell>
         <AnimatePresence mode="wait">
-          {/* ── Layer 1 ──────────────────────────────────────── */}
+          {/* ── Layer 1: Nudge + dropout options in one sheet ── */}
           {layer === 'L1' && (
             <motion.div
               key="L1"
@@ -602,83 +583,65 @@ export default function ExitNudgePrototype() {
                 cohort={cohort}
                 stateMode={stateMode}
                 onContinueNow={goBackToL1}
-                onContinueLater={() => setLayer('L2')}
-              />
-            </motion.div>
-          )}
-
-          {/* ── Layer 2 ──────────────────────────────────────── */}
-          {layer === 'L2' && (
-            <motion.div
-              key="L2"
-              className="absolute inset-0 flex flex-col"
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 20, opacity: 0 }}
-              transition={{ duration: 0.22 }}
-            >
-              <L2Survey
-                screen={screen}
-                stateMode={stateMode}
                 onRoute={handleRoute}
                 onSkip={() => handleRoute('default')}
               />
             </motion.div>
           )}
 
-          {/* ── Layer 3: Reminder ─────────────────────────────── */}
-          {layer === 'L3_reminder' && (
+          {/* ── Layer 2: Reminder ─────────────────────────────── */}
+          {layer === 'L2_reminder' && (
             <motion.div
-              key="L3_reminder"
+              key="L2_reminder"
               className="absolute inset-0 flex flex-col"
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 20, opacity: 0 }}
               transition={{ duration: 0.22 }}
             >
-              <L3Reminder onConfirm={handleReminderConfirm} onBack={() => setLayer('L1')} />
+              <L3Reminder onConfirm={handleReminderConfirm} onBack={goBackToL1} />
             </motion.div>
           )}
 
-          {/* ── Layer 3: PBM ──────────────────────────────────── */}
-          {layer === 'L3_pbm' && (
+          {/* ── Layer 2: PBM ──────────────────────────────────── */}
+          {layer === 'L2_pbm' && (
             <motion.div
-              key="L3_pbm"
+              key="L2_pbm"
               className="absolute inset-0 flex flex-col"
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 20, opacity: 0 }}
               transition={{ duration: 0.22 }}
             >
-              <L3PBM onConfirm={handlePBMConfirm} onBack={() => setLayer('L1')} />
+              <L3PBM onConfirm={handlePBMConfirm} onBack={goBackToL1} />
             </motion.div>
           )}
 
-          {/* ── Layer 3: Ticket ───────────────────────────────── */}
-          {layer === 'L3_ticket' && (
+          {/* ── Layer 2: Ticket ───────────────────────────────── */}
+          {layer === 'L2_ticket' && (
             <motion.div
-              key="L3_ticket"
+              key="L2_ticket"
               className="absolute inset-0 flex flex-col"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.22 }}
             >
-              <L3Ticket onBack={() => setLayer('L1')} />
+              <L3Ticket onBack={goBackToL1} />
             </motion.div>
           )}
 
-          {/* ── Layer 3: Confirm ──────────────────────────────── */}
-          {layer === 'L3_confirm' && confirm && (
+          {/* ── Layer 2: Confirm ──────────────────────────────── */}
+          {layer === 'L2_confirm' && confirm && (
             <motion.div
-              key="L3_confirm"
+              key="L2_confirm"
               className="absolute inset-0 flex flex-col"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.22 }}
             >
-              <L3Confirm state={confirm} onBack={() => setLayer('L1')} />
+              <L3Confirm state={confirm} onBack={goBackToL1} />
             </motion.div>
           )}
         </AnimatePresence>
@@ -706,7 +669,7 @@ export default function ExitNudgePrototype() {
             <span className="font-medium">Error state</span> available on screens 2, 6, 7, 8, 9, 10, 11, 12, 14, 15. Button disabled on screens with no error variant.
           </p>
           <p className="text-[10px] text-on-surface-secondary m-0">
-            <span className="font-medium">Skip</span> on Layer 2 always routes to default reminder confirmation.
+            <span className="font-medium">Skip</span> on the nudge sheet routes to default reminder confirmation.
           </p>
         </div>
       </div>
