@@ -1,0 +1,87 @@
+@import "./tokens.css";
+
+/* ═══ Haffer — Variable Font (primary) ═══ */
+@font-face {
+  font-family: "Haffer";
+  src: url("/fonts/HafferUprightsVF.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Haffer — Static fallbacks (browsers without variable font support) */
+@font-face { font-family: "Haffer"; src: url("/fonts/Haffer-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Haffer"; src: url("/fonts/Haffer-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Haffer"; src: url("/fonts/Haffer-SemiBold.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Haffer"; src: url("/fonts/Haffer-Bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Haffer"; src: url("/fonts/Haffer-Heavy.woff2") format("woff2"); font-weight: 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Haffer"; src: url("/fonts/Haffer-Black.woff2") format("woff2"); font-weight: 950; font-style: normal; font-display: swap; }
+
+/* ═══ Haffer Mono — Variable Font (primary) ═══ */
+@font-face {
+  font-family: "Haffer Mono";
+  src: url("/fonts/HafferMonoUprightsVF.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Haffer Mono — Static fallbacks */
+@font-face { font-family: "Haffer Mono"; src: url("/fonts/HafferMono-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Haffer Mono"; src: url("/fonts/HafferMono-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Haffer Mono"; src: url("/fonts/HafferMono-SemiBold.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Haffer Mono"; src: url("/fonts/HafferMono-Bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Haffer Mono"; src: url("/fonts/HafferMono-Heavy.woff2") format("woff2"); font-weight: 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Haffer Mono"; src: url("/fonts/HafferMono-Black.woff2") format("woff2"); font-weight: 950; font-style: normal; font-display: swap; }
+
+/* ═══ CSS Vars for font family ═══ */
+:root {
+  --font-sans: "Haffer";
+  --font-mono: "Haffer Mono";
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    background-color: var(--surface-primary);
+    color: var(--on-surface-primary);
+    font-family: var(--font-sans), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-size: var(--typo-fs-300);
+    line-height: var(--typo-lh-150);
+  }
+
+  /* Typography role utilities — bind semantic role tokens to classes */
+  .type-displaySm { font-size: var(--type-displaySm-size); line-height: var(--type-displaySm-lh); font-weight: var(--type-displaySm-weight); letter-spacing: var(--type-displaySm-ls); text-transform: var(--type-displaySm-transform); }
+  .type-displayMd { font-size: var(--type-displayMd-size); line-height: var(--type-displayMd-lh); font-weight: var(--type-displayMd-weight); letter-spacing: var(--type-displayMd-ls); text-transform: var(--type-displayMd-transform); }
+  .type-displayLg { font-size: var(--type-displayLg-size); line-height: var(--type-displayLg-lh); font-weight: var(--type-displayLg-weight); letter-spacing: var(--type-displayLg-ls); text-transform: var(--type-displayLg-transform); }
+  .type-headerSm  { font-size: var(--type-headerSm-size);  line-height: var(--type-headerSm-lh);  font-weight: var(--type-headerSm-weight);  letter-spacing: var(--type-headerSm-ls); }
+  .type-headerMd  { font-size: var(--type-headerMd-size);  line-height: var(--type-headerMd-lh);  font-weight: var(--type-headerMd-weight);  letter-spacing: var(--type-headerMd-ls); }
+  .type-headerLg  { font-size: var(--type-headerLg-size);  line-height: var(--type-headerLg-lh);  font-weight: var(--type-headerLg-weight);  letter-spacing: var(--type-headerLg-ls); }
+  .type-titleSm   { font-size: var(--type-titleSm-size);   line-height: var(--type-titleSm-lh);   font-weight: var(--type-titleSm-weight);   letter-spacing: var(--type-titleSm-ls); }
+  .type-titleMd   { font-size: var(--type-titleMd-size);   line-height: var(--type-titleMd-lh);   font-weight: var(--type-titleMd-weight);   letter-spacing: var(--type-titleMd-ls); }
+  .type-titleLg   { font-size: var(--type-titleLg-size);   line-height: var(--type-titleLg-lh);   font-weight: var(--type-titleLg-weight);   letter-spacing: var(--type-titleLg-ls); }
+  .type-bodySm    { font-size: var(--type-bodySm-size);    line-height: var(--type-bodySm-lh);    font-weight: var(--type-bodySm-weight);    letter-spacing: var(--type-bodySm-ls); }
+  .type-bodyMd    { font-size: var(--type-bodyMd-size);    line-height: var(--type-bodyMd-lh);    font-weight: var(--type-bodyMd-weight);    letter-spacing: var(--type-bodyMd-ls); }
+  .type-bodyLg    { font-size: var(--type-bodyLg-size);    line-height: var(--type-bodyLg-lh);    font-weight: var(--type-bodyLg-weight);    letter-spacing: var(--type-bodyLg-ls); }
+  .type-labelSm   { font-size: var(--type-labelSm-size);   line-height: var(--type-labelSm-lh);   font-weight: var(--type-labelSm-weight);   letter-spacing: var(--type-labelSm-ls); }
+  .type-labelMd   { font-size: var(--type-labelMd-size);   line-height: var(--type-labelMd-lh);   font-weight: var(--type-labelMd-weight);   letter-spacing: var(--type-labelMd-ls); }
+  .type-labelLg   { font-size: var(--type-labelLg-size);   line-height: var(--type-labelLg-lh);   font-weight: var(--type-labelLg-weight);   letter-spacing: var(--type-labelLg-ls); }
+  .type-labelHeavySm { font-size: var(--type-labelHeavySm-size); line-height: var(--type-labelHeavySm-lh); font-weight: var(--type-labelHeavySm-weight); letter-spacing: var(--type-labelHeavySm-ls); }
+  .type-labelHeavyMd { font-size: var(--type-labelHeavyMd-size); line-height: var(--type-labelHeavyMd-lh); font-weight: var(--type-labelHeavyMd-weight); letter-spacing: var(--type-labelHeavyMd-ls); }
+  .type-labelHeavyLg { font-size: var(--type-labelHeavyLg-size); line-height: var(--type-labelHeavyLg-lh); font-weight: var(--type-labelHeavyLg-weight); letter-spacing: var(--type-labelHeavyLg-ls); }
+  .type-numberSm  { font-size: var(--type-numberSm-size);  line-height: var(--type-numberSm-lh);  font-weight: var(--type-numberSm-weight);  letter-spacing: var(--type-numberSm-ls);  font-variant-numeric: tabular-nums; }
+  .type-numberMd  { font-size: var(--type-numberMd-size);  line-height: var(--type-numberMd-lh);  font-weight: var(--type-numberMd-weight);  letter-spacing: var(--type-numberMd-ls);  font-variant-numeric: tabular-nums; }
+  .type-numberLg  { font-size: var(--type-numberLg-size);  line-height: var(--type-numberLg-lh);  font-weight: var(--type-numberLg-weight);  letter-spacing: var(--type-numberLg-ls);  font-variant-numeric: tabular-nums; }
+  .type-overline  { font-size: var(--type-overline-size);  line-height: var(--type-overline-lh);  font-weight: var(--type-overline-weight);  letter-spacing: var(--type-overline-ls);  text-transform: var(--type-overline-transform); }
+  .type-overlineLg { font-size: var(--type-overlineLg-size); line-height: var(--type-overlineLg-lh); font-weight: var(--type-overlineLg-weight); letter-spacing: var(--type-overlineLg-ls); text-transform: var(--type-overlineLg-transform); }
+}

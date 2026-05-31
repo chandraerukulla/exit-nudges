@@ -1,0 +1,583 @@
+/**
+ * ORIGIN DESIGN TOKENS — CSS Custom Properties (Web)
+ *
+ * DO NOT EDIT. Regenerate with: node scripts/build-ts.mjs
+ *
+ * Typography uses rem units (base 16) for accessibility.
+ * Sourced from web-semantic.json + web-primitives.json (web interfaces).
+ * Mobile apps use semantic.json + primitives.json (px) directly.
+ *
+ * Primitives → semantic references. Change a primitive,
+ * all semantics update automatically.
+ */
+
+/* ═══ Color Primitives ═══ */
+:root {
+  --color-neutral-50: #ffffff;
+  --color-neutral-100: #f7f6f6;
+  --color-neutral-200: #ebe9e9;
+  --color-neutral-300: #d0cdcc;
+  --color-neutral-400: #b4b0af;
+  --color-neutral-500: #938e8d;
+  --color-neutral-600: #736d6c;
+  --color-neutral-700: #554e4d;
+  --color-neutral-800: #3a3433;
+  --color-neutral-900: #221b1a;
+  --color-neutral-950: #16100f;
+  --color-neutral-975: #100909;
+  --color-neutral-1000: #090404;
+  --color-maroon-50: #fff8f7;
+  --color-maroon-100: #fff4f2;
+  --color-maroon-200: #ffe2de;
+  --color-maroon-300: #f0c1ba;
+  --color-maroon-400: #dca098;
+  --color-maroon-500: #c17971;
+  --color-maroon-600: #a4544c;
+  --color-maroon-700: #85302a;
+  --color-maroon-800: #680d0d;
+  --color-maroon-900: #3e0002;
+  --color-maroon-950: #2a0001;
+  --color-maroon-975: #1f0001;
+  --color-maroon-1000: #140000;
+  --color-crimson-50: #fff8f9;
+  --color-crimson-100: #fff3f5;
+  --color-crimson-200: #ffe1e5;
+  --color-crimson-300: #ffb7c3;
+  --color-crimson-400: #f190a2;
+  --color-crimson-500: #d8637e;
+  --color-crimson-600: #b33056;
+  --color-crimson-700: #90163f;
+  --color-crimson-800: #670028;
+  --color-crimson-900: #3d0014;
+  --color-crimson-950: #29000b;
+  --color-crimson-975: #1e0007;
+  --color-crimson-1000: #130003;
+  --color-peach-50: #fff8f6;
+  --color-peach-100: #fff4f0;
+  --color-peach-200: #ffe3d9;
+  --color-peach-300: #ffae92;
+  --color-peach-400: #e99b80;
+  --color-peach-500: #c07b63;
+  --color-peach-600: #985d49;
+  --color-peach-700: #714231;
+  --color-peach-800: #4e2a1e;
+  --color-peach-900: #2e150d;
+  --color-peach-950: #1f0c06;
+  --color-peach-975: #160703;
+  --color-peach-1000: #0d0301;
+  --color-gold-50: #fff9f2;
+  --color-gold-100: #fff5e9;
+  --color-gold-200: #ffe5c4;
+  --color-gold-300: #ffc16b;
+  --color-gold-400: #faa810;
+  --color-gold-500: #c18000;
+  --color-gold-600: #966200;
+  --color-gold-700: #6d4700;
+  --color-gold-800: #4b2f00;
+  --color-gold-900: #2a1900;
+  --color-gold-950: #1c0e00;
+  --color-gold-975: #130900;
+  --color-gold-1000: #0b0400;
+  --color-lime-50: #f3ffe8;
+  --color-lime-100: #ebffd8;
+  --color-lime-200: #c6ff86;
+  --color-lime-300: #afea6a;
+  --color-lime-400: #8ec54b;
+  --color-lime-500: #70a031;
+  --color-lime-600: #547d1a;
+  --color-lime-700: #3b5b05;
+  --color-lime-800: #263e00;
+  --color-lime-900: #132200;
+  --color-lime-950: #0a1500;
+  --color-lime-975: #060e00;
+  --color-lime-1000: #030800;
+  --color-teal-50: #f1fdff;
+  --color-teal-100: #e7fbff;
+  --color-teal-200: #d3f0f5;
+  --color-teal-300: #a8d7e0;
+  --color-teal-400: #7dbdc8;
+  --color-teal-500: #499dab;
+  --color-teal-600: #097e8d;
+  --color-teal-700: #005b66;
+  --color-teal-800: #003d45;
+  --color-teal-900: #002227;
+  --color-teal-950: #001519;
+  --color-teal-975: #000e11;
+  --color-teal-1000: #000709;
+  --color-blue-50: #f8faff;
+  --color-blue-100: #f4f7ff;
+  --color-blue-200: #e1e9ff;
+  --color-blue-300: #bbccff;
+  --color-blue-400: #93adff;
+  --color-blue-500: #6583ff;
+  --color-blue-600: #4e68f4;
+  --color-blue-700: #2e3eb1;
+  --color-blue-800: #1c277f;
+  --color-blue-900: #0d134d;
+  --color-blue-950: #060a35;
+  --color-blue-975: #040627;
+  --color-blue-1000: #020319;
+  --color-red-50: #fff8f7;
+  --color-red-100: #fff4f2;
+  --color-red-200: #ffe2de;
+  --color-red-300: #ffbab1;
+  --color-red-400: #ff8b7e;
+  --color-red-500: #f34c43;
+  --color-red-600: #dc2626;
+  --color-red-700: #99000b;
+  --color-red-800: #6a0005;
+  --color-red-900: #3e0002;
+  --color-red-950: #2a0001;
+  --color-red-975: #1f0000;
+  --color-red-1000: #140000;
+  --color-green-50: #f0fff2;
+  --color-green-100: #e5ffe8;
+  --color-green-200: #b5ffc2;
+  --color-green-300: #8ce69e;
+  --color-green-400: #61cb7a;
+  --color-green-500: #16a34a;
+  --color-green-600: #008539;
+  --color-green-700: #006127;
+  --color-green-800: #004218;
+  --color-green-900: #00250a;
+  --color-green-950: #001705;
+  --color-green-975: #001003;
+  --color-green-1000: #000901;
+  --color-yellow-50: #fffaee;
+  --color-yellow-100: #fff6e3;
+  --color-yellow-200: #ffe7b3;
+  --color-yellow-300: #fcc537;
+  --color-yellow-400: #eab308;
+  --color-yellow-500: #b38800;
+  --color-yellow-600: #8b6900;
+  --color-yellow-700: #654b00;
+  --color-yellow-800: #453200;
+  --color-yellow-900: #271b00;
+  --color-yellow-950: #191000;
+  --color-yellow-975: #110a00;
+  --color-yellow-1000: #090500;
+  --color-white-alpha-8: #ffffff14;
+  --color-white-alpha-16: #ffffff29;
+  --color-white-alpha-40: #ffffff66;
+  --color-white-alpha-70: #ffffffb3;
+  --color-white-alpha-100: #ffffff;
+  --color-black-alpha-8: #00000014;
+  --color-black-alpha-16: #00000029;
+  --color-black-alpha-40: #00000066;
+  --color-black-alpha-70: #000000b3;
+  --color-black-alpha-100: #000000;
+
+  /* ═══ Spacing ═══ */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-28: 28px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-80: 80px;
+
+  /* ═══ Radius ═══ */
+  --radius-4: 4px;
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-20: 20px;
+  --radius-24: 24px;
+  --radius-36: 36px;
+  --radius-full: 9999px;
+
+  /* ═══ Font Weights ═══ */
+  --typo-fw-regular: 400;
+  --typo-fw-medium: 500;
+  --typo-fw-semibold: 600;
+  --typo-fw-bold: 700;
+  --typo-fw-heavy: 900;
+}
+
+/* ═══ Semantic — Light (default) ═══ */
+:root {
+  --surface-primary: var(--color-neutral-50);
+  --surface-secondary: var(--color-neutral-100);
+  --surface-tertiary: var(--color-neutral-200);
+  --surface-overlay: var(--color-neutral-50);
+  --surface-contrast: var(--color-neutral-1000);
+  --on-surface-primary: var(--color-neutral-1000);
+  --on-surface-secondary: var(--color-neutral-700);
+  --on-surface-tertiary: var(--color-neutral-500);
+  --on-surface-disabled: var(--color-neutral-400);
+  --on-surface-contrast: var(--color-neutral-50);
+  --border-primary: var(--color-neutral-200);
+  --border-secondary: var(--color-neutral-300);
+  --border-disabled: var(--color-neutral-200);
+  --border-contrast: var(--color-neutral-1000);
+  --interactive-primary: var(--color-neutral-1000);
+  --interactive-secondary: var(--color-neutral-100);
+  --interactive-disabled: var(--color-neutral-200);
+  --interactive-contrast: var(--color-neutral-50);
+  --error-solid: var(--color-red-600);
+  --error-light: var(--color-red-100);
+  --error-on-solid: var(--color-neutral-50);
+  --error-on-light: var(--color-red-700);
+  --error-border: var(--color-red-600);
+  --success-solid: var(--color-green-600);
+  --success-light: var(--color-green-100);
+  --success-on-solid: var(--color-neutral-50);
+  --success-on-light: var(--color-green-700);
+  --success-border: var(--color-green-600);
+  --warning-solid: var(--color-yellow-300);
+  --warning-light: var(--color-yellow-100);
+  --warning-on-solid: var(--color-neutral-1000);
+  --warning-on-light: var(--color-yellow-600);
+  --warning-border: var(--color-yellow-400);
+  --accent-solid: var(--color-blue-600);
+  --accent-light: var(--color-blue-100);
+  --accent-on-solid: var(--color-neutral-50);
+  --accent-on-light: var(--color-blue-700);
+  --accent-border: var(--color-blue-600);
+  --on-brand-light: var(--color-white-alpha-100);
+  --on-brand-light-secondary: var(--color-white-alpha-70);
+  --on-brand-light-disabled: var(--color-white-alpha-40);
+  --on-brand-dark: var(--color-black-alpha-100);
+  --on-brand-dark-secondary: var(--color-black-alpha-70);
+  --on-brand-dark-disabled: var(--color-black-alpha-40);
+  --overlay-scrim: var(--color-black-alpha-40);
+  --overlay-solid-hover: var(--color-white-alpha-8);
+  --overlay-solid-pressed: var(--color-white-alpha-16);
+  --overlay-light-hover: var(--color-black-alpha-8);
+  --overlay-light-pressed: var(--color-black-alpha-16);
+  --brand-maroon: var(--color-maroon-800);
+  --brand-crimson: var(--color-crimson-600);
+  --brand-teal: var(--color-teal-600);
+  --brand-blue: var(--color-blue-600);
+  --brand-peach: var(--color-peach-300);
+  --brand-gold: var(--color-gold-400);
+  --brand-lime: var(--color-lime-300);
+}
+
+/* ═══ Semantic — Dark ═══ */
+.dark {
+  --surface-primary: var(--color-neutral-950);
+  --surface-secondary: var(--color-neutral-900);
+  --surface-tertiary: var(--color-neutral-1000);
+  --surface-overlay: var(--color-neutral-900);
+  --surface-contrast: var(--color-neutral-50);
+  --on-surface-primary: var(--color-neutral-50);
+  --on-surface-secondary: var(--color-neutral-300);
+  --on-surface-tertiary: var(--color-neutral-500);
+  --on-surface-disabled: var(--color-neutral-600);
+  --on-surface-contrast: var(--color-neutral-1000);
+  --border-primary: var(--color-neutral-900);
+  --border-secondary: var(--color-neutral-800);
+  --border-disabled: var(--color-neutral-800);
+  --border-contrast: var(--color-neutral-50);
+  --interactive-primary: var(--color-neutral-50);
+  --interactive-secondary: var(--color-neutral-900);
+  --interactive-disabled: var(--color-neutral-800);
+  --interactive-contrast: var(--color-neutral-1000);
+  --error-solid: var(--color-red-500);
+  --error-light: var(--color-red-950);
+  --error-on-solid: var(--color-neutral-50);
+  --error-on-light: var(--color-red-300);
+  --error-border: var(--color-red-700);
+  --success-solid: var(--color-green-500);
+  --success-light: var(--color-green-950);
+  --success-on-solid: var(--color-neutral-50);
+  --success-on-light: var(--color-green-300);
+  --success-border: var(--color-green-700);
+  --warning-solid: var(--color-yellow-400);
+  --warning-light: var(--color-yellow-950);
+  --warning-on-solid: var(--color-neutral-1000);
+  --warning-on-light: var(--color-yellow-300);
+  --warning-border: var(--color-yellow-700);
+  --accent-solid: var(--color-blue-600);
+  --accent-light: var(--color-blue-950);
+  --accent-on-solid: var(--color-neutral-50);
+  --accent-on-light: var(--color-blue-300);
+  --accent-border: var(--color-blue-700);
+  --on-brand-light: var(--color-white-alpha-100);
+  --on-brand-light-secondary: var(--color-white-alpha-70);
+  --on-brand-light-disabled: var(--color-white-alpha-40);
+  --on-brand-dark: var(--color-black-alpha-100);
+  --on-brand-dark-secondary: var(--color-black-alpha-70);
+  --on-brand-dark-disabled: var(--color-black-alpha-40);
+  --overlay-scrim: var(--color-black-alpha-40);
+  --overlay-solid-hover: var(--color-white-alpha-8);
+  --overlay-solid-pressed: var(--color-white-alpha-16);
+  --overlay-light-hover: var(--color-black-alpha-8);
+  --overlay-light-pressed: var(--color-black-alpha-16);
+  --brand-maroon: var(--color-maroon-800);
+  --brand-crimson: var(--color-crimson-600);
+  --brand-teal: var(--color-teal-600);
+  --brand-blue: var(--color-blue-600);
+  --brand-peach: var(--color-peach-300);
+  --brand-gold: var(--color-gold-400);
+  --brand-lime: var(--color-lime-300);
+}
+
+/* ═══ Responsive Typography (rem — scales with browser font-size) ═══ */
+:root {
+  /* Font sizes — mobile */
+  --typo-fs-100: 0.75rem;
+  --typo-fs-200: 0.75rem;
+  --typo-fs-300: 0.875rem;
+  --typo-fs-350: 1rem;
+  --typo-fs-400: 1rem;
+  --typo-fs-450: 1.125rem;
+  --typo-fs-500: 1.25rem;
+  --typo-fs-600: 1.5rem;
+  --typo-fs-700: 1.5rem;
+  --typo-fs-800: 2rem;
+  --typo-fs-900: 2.25rem;
+  --typo-fs-1000: 2.25rem;
+  --typo-fs-1100: 2.8125rem;
+  --typo-fs-1200: 3.5625rem;
+
+  /* Line heights — unitless ratios */
+  --typo-lh-100: 1;
+  --typo-lh-110: 1.1;
+  --typo-lh-120: 1.2;
+  --typo-lh-130: 1.3;
+  --typo-lh-140: 1.4;
+  --typo-lh-150: 1.5;
+  --typo-lh-160: 1.6;
+  --typo-lh-090: 0.9;
+  --typo-lh-095: 0.95;
+
+  /* Letter spacing */
+  --typo-ls-tight-4: -0.02em;
+  --typo-ls-tight-3: -0.017em;
+  --typo-ls-tight-2: -0.01em;
+  --typo-ls-tight-1: -0.009em;
+  --typo-ls-tight-0: -0.006em;
+  --typo-ls-none: 0;
+  --typo-ls-wide-1: 0.005em;
+  --typo-ls-wide-2: 0.015em;
+}
+
+@media (min-width: 735px) {
+  :root {
+    /* Font sizes — tablet */
+    --typo-fs-100: 0.8125rem;
+    --typo-fs-200: 0.8125rem;
+    --typo-fs-300: 0.9375rem;
+    --typo-fs-350: 1.125rem;
+    --typo-fs-400: 1.0625rem;
+    --typo-fs-450: 1.25rem;
+    --typo-fs-500: 1.375rem;
+    --typo-fs-600: 1.75rem;
+    --typo-fs-700: 1.625rem;
+    --typo-fs-800: 2.25rem;
+    --typo-fs-900: 2.5rem;
+    --typo-fs-1000: 2.5rem;
+    --typo-fs-1100: 3.25rem;
+    --typo-fs-1200: 4rem;
+  }
+}
+
+@media (min-width: 1069px) {
+  :root {
+    /* Font sizes — desktop (fluid clamp) */
+    --typo-fs-100: 0.875rem;
+    --typo-fs-200: clamp(0.875rem, 0.6949rem + 0.2695vw, 0.9375rem);
+    --typo-fs-300: clamp(1rem, 0.8199rem + 0.2695vw, 1.0625rem);
+    --typo-fs-350: clamp(1.25rem, 0.8898rem + 0.5391vw, 1.375rem);
+    --typo-fs-400: clamp(1.125rem, 0.7648rem + 0.5391vw, 1.25rem);
+    --typo-fs-450: clamp(1.375rem, 1.0148rem + 0.5391vw, 1.5rem);
+    --typo-fs-500: clamp(1.5rem, 0.7796rem + 1.0782vw, 1.75rem);
+    --typo-fs-600: clamp(2rem, 1.2796rem + 1.0782vw, 2.25rem);
+    --typo-fs-700: clamp(2.25rem, 1.5296rem + 1.0782vw, 2.5rem);
+    --typo-fs-800: clamp(2.75rem, 2.0296rem + 1.0782vw, 3rem);
+    --typo-fs-900: clamp(3.25rem, 2.5296rem + 1.0782vw, 3.5rem);
+    --typo-fs-1000: clamp(3rem, 1.5593rem + 2.1563vw, 3.5rem);
+    --typo-fs-1100: clamp(4rem, 2.5593rem + 2.1563vw, 4.5rem);
+    --typo-fs-1200: clamp(5.25rem, 3.8093rem + 2.1563vw, 5.75rem);
+  }
+}
+
+/* ═══ Semantic Typography ═══ */
+/* Role-based tokens that reference responsive primitives above.
+   Use these in CSS — they automatically adapt across breakpoints. */
+:root {
+  /* display s */
+  --type-displaySm-size: var(--typo-fs-1000);
+  --type-displaySm-lh: var(--typo-lh-100);
+  --type-displaySm-weight: 900;
+  --type-displaySm-ls: var(--typo-ls-tight-2);
+  --type-displaySm-transform: uppercase;
+  /* display m */
+  --type-displayMd-size: var(--typo-fs-1100);
+  --type-displayMd-lh: var(--typo-lh-100);
+  --type-displayMd-weight: 900;
+  --type-displayMd-ls: var(--typo-ls-tight-2);
+  --type-displayMd-transform: uppercase;
+  /* display l */
+  --type-displayLg-size: var(--typo-fs-1200);
+  --type-displayLg-lh: var(--typo-lh-095);
+  --type-displayLg-weight: 900;
+  --type-displayLg-ls: var(--typo-ls-tight-2);
+  --type-displayLg-transform: uppercase;
+  /* header s */
+  --type-headerSm-size: var(--typo-fs-700);
+  --type-headerSm-lh: var(--typo-lh-120);
+  --type-headerSm-weight: 700;
+  --type-headerSm-ls: var(--typo-ls-tight-2);
+  /* header m */
+  --type-headerMd-size: var(--typo-fs-800);
+  --type-headerMd-lh: var(--typo-lh-120);
+  --type-headerMd-weight: 700;
+  --type-headerMd-ls: var(--typo-ls-tight-2);
+  /* header l */
+  --type-headerLg-size: var(--typo-fs-900);
+  --type-headerLg-lh: var(--typo-lh-120);
+  --type-headerLg-weight: 700;
+  --type-headerLg-ls: var(--typo-ls-tight-2);
+  /* title s */
+  --type-titleSm-size: var(--typo-fs-400);
+  --type-titleSm-lh: var(--typo-lh-140);
+  --type-titleSm-weight: 600;
+  --type-titleSm-ls: var(--typo-ls-tight-0);
+  /* title m */
+  --type-titleMd-size: var(--typo-fs-450);
+  --type-titleMd-lh: var(--typo-lh-130);
+  --type-titleMd-weight: 600;
+  --type-titleMd-ls: var(--typo-ls-tight-1);
+  /* title l */
+  --type-titleLg-size: var(--typo-fs-500);
+  --type-titleLg-lh: var(--typo-lh-120);
+  --type-titleLg-weight: 600;
+  --type-titleLg-ls: var(--typo-ls-tight-3);
+  /* label s */
+  --type-labelSm-size: var(--typo-fs-100);
+  --type-labelSm-lh: var(--typo-lh-140);
+  --type-labelSm-weight: 400;
+  --type-labelSm-ls: var(--typo-ls-wide-1);
+  /* label m */
+  --type-labelMd-size: var(--typo-fs-200);
+  --type-labelMd-lh: var(--typo-lh-140);
+  --type-labelMd-weight: 400;
+  --type-labelMd-ls: var(--typo-ls-none);
+  /* label l */
+  --type-labelLg-size: var(--typo-fs-300);
+  --type-labelLg-lh: var(--typo-lh-140);
+  --type-labelLg-weight: 400;
+  --type-labelLg-ls: var(--typo-ls-tight-0);
+  /* label-heavy s */
+  --type-labelHeavySm-size: var(--typo-fs-100);
+  --type-labelHeavySm-lh: var(--typo-lh-140);
+  --type-labelHeavySm-weight: 500;
+  --type-labelHeavySm-ls: var(--typo-ls-wide-1);
+  /* label-heavy m */
+  --type-labelHeavyMd-size: var(--typo-fs-200);
+  --type-labelHeavyMd-lh: var(--typo-lh-140);
+  --type-labelHeavyMd-weight: 500;
+  --type-labelHeavyMd-ls: var(--typo-ls-none);
+  /* label-heavy l */
+  --type-labelHeavyLg-size: var(--typo-fs-300);
+  --type-labelHeavyLg-lh: var(--typo-lh-140);
+  --type-labelHeavyLg-weight: 500;
+  --type-labelHeavyLg-ls: var(--typo-ls-tight-0);
+  /* label-mono s */
+  --type-labelMonoSm-size: var(--typo-fs-100);
+  --type-labelMonoSm-lh: var(--typo-lh-140);
+  --type-labelMonoSm-weight: 400;
+  --type-labelMonoSm-ls: var(--typo-ls-wide-1);
+  /* label-mono m */
+  --type-labelMonoMd-size: var(--typo-fs-200);
+  --type-labelMonoMd-lh: var(--typo-lh-140);
+  --type-labelMonoMd-weight: 400;
+  --type-labelMonoMd-ls: var(--typo-ls-none);
+  /* label-mono l */
+  --type-labelMonoLg-size: var(--typo-fs-300);
+  --type-labelMonoLg-lh: var(--typo-lh-140);
+  --type-labelMonoLg-weight: 400;
+  --type-labelMonoLg-ls: var(--typo-ls-tight-0);
+  /* label-mono-heavy s */
+  --type-labelMonoHeavySm-size: var(--typo-fs-100);
+  --type-labelMonoHeavySm-lh: var(--typo-lh-140);
+  --type-labelMonoHeavySm-weight: 500;
+  --type-labelMonoHeavySm-ls: var(--typo-ls-wide-1);
+  /* label-mono-heavy m */
+  --type-labelMonoHeavyMd-size: var(--typo-fs-200);
+  --type-labelMonoHeavyMd-lh: var(--typo-lh-140);
+  --type-labelMonoHeavyMd-weight: 500;
+  --type-labelMonoHeavyMd-ls: var(--typo-ls-none);
+  /* label-mono-heavy l */
+  --type-labelMonoHeavyLg-size: var(--typo-fs-300);
+  --type-labelMonoHeavyLg-lh: var(--typo-lh-140);
+  --type-labelMonoHeavyLg-weight: 500;
+  --type-labelMonoHeavyLg-ls: var(--typo-ls-tight-0);
+  /* body s */
+  --type-bodySm-size: var(--typo-fs-200);
+  --type-bodySm-lh: var(--typo-lh-150);
+  --type-bodySm-weight: 400;
+  --type-bodySm-ls: var(--typo-ls-none);
+  /* body m */
+  --type-bodyMd-size: var(--typo-fs-300);
+  --type-bodyMd-lh: var(--typo-lh-150);
+  --type-bodyMd-weight: 400;
+  --type-bodyMd-ls: var(--typo-ls-tight-0);
+  /* body l */
+  --type-bodyLg-size: var(--typo-fs-400);
+  --type-bodyLg-lh: var(--typo-lh-150);
+  --type-bodyLg-weight: 400;
+  --type-bodyLg-ls: var(--typo-ls-tight-1);
+  /* number s */
+  --type-numberSm-size: var(--typo-fs-200);
+  --type-numberSm-lh: var(--typo-lh-140);
+  --type-numberSm-weight: 500;
+  --type-numberSm-ls: var(--typo-ls-none);
+  --type-numberSm-tnum: tabular-nums;
+  /* number m */
+  --type-numberMd-size: var(--typo-fs-300);
+  --type-numberMd-lh: var(--typo-lh-140);
+  --type-numberMd-weight: 500;
+  --type-numberMd-ls: var(--typo-ls-tight-0);
+  --type-numberMd-tnum: tabular-nums;
+  /* number l */
+  --type-numberLg-size: var(--typo-fs-400);
+  --type-numberLg-lh: var(--typo-lh-140);
+  --type-numberLg-weight: 500;
+  --type-numberLg-ls: var(--typo-ls-tight-1);
+  --type-numberLg-tnum: tabular-nums;
+  /* number display-xs */
+  --type-numberDisplayXs-size: var(--typo-fs-800);
+  --type-numberDisplayXs-lh: var(--typo-lh-100);
+  --type-numberDisplayXs-weight: 900;
+  --type-numberDisplayXs-ls: var(--typo-ls-tight-2);
+  --type-numberDisplayXs-transform: uppercase;
+  /* number display-s */
+  --type-numberDisplaySm-size: var(--typo-fs-1000);
+  --type-numberDisplaySm-lh: var(--typo-lh-100);
+  --type-numberDisplaySm-weight: 900;
+  --type-numberDisplaySm-ls: var(--typo-ls-tight-2);
+  --type-numberDisplaySm-transform: uppercase;
+  /* number display-m */
+  --type-numberDisplayMd-size: var(--typo-fs-1100);
+  --type-numberDisplayMd-lh: var(--typo-lh-100);
+  --type-numberDisplayMd-weight: 900;
+  --type-numberDisplayMd-ls: var(--typo-ls-tight-2);
+  --type-numberDisplayMd-transform: uppercase;
+  /* number display-l */
+  --type-numberDisplayLg-size: var(--typo-fs-1200);
+  --type-numberDisplayLg-lh: var(--typo-lh-095);
+  --type-numberDisplayLg-weight: 900;
+  --type-numberDisplayLg-ls: var(--typo-ls-tight-2);
+  --type-numberDisplayLg-transform: uppercase;
+  /* overline standard */
+  --type-overline-size: var(--typo-fs-100);
+  --type-overline-lh: var(--typo-lh-140);
+  --type-overline-weight: 600;
+  --type-overline-ls: var(--typo-ls-wide-2);
+  --type-overline-transform: uppercase;
+  /* overline l */
+  --type-overlineLg-size: var(--typo-fs-200);
+  --type-overlineLg-lh: var(--typo-lh-140);
+  --type-overlineLg-weight: 600;
+  --type-overlineLg-ls: var(--typo-ls-wide-2);
+  --type-overlineLg-transform: uppercase;
+}
